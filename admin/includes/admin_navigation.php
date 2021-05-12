@@ -1,3 +1,14 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">CMS Dashboard</a>
+        </div>
 <ul class="nav navbar-right top-nav">
             <li><a href="../index.php">HOME</a></li>
             <li class="dropdown">
@@ -124,7 +135,15 @@
                     <a href="categories.php"><i class="fa fa-fw fa-bar-chart-o"></i> Categories</a>
                 </li>
                 <li>
-                    <a href="tables.html"><i class="fa fa-fw fa-table"></i> Comments</a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#comments"><i class="fa fa-fw fa-arrows-v"></i> Comments <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="comments" class="collapse">
+                        <li>
+                        <a href="./comments.php?source=unapproved"><i class="fa fa-fw fa-table"></i> Unapproved Comments</a>
+                        </li>
+                        <li>
+                            <a href="comments.php"> All Comments</a>
+                        </li>
+                    </ul>
                 </li>
 
 
