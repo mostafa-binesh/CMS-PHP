@@ -10,7 +10,6 @@ if (!$result) {
 } else if(mysqli_num_rows($result) == 0){
     echo "<h2>NO COMMENT FOUND</h2>";
 }
-
 else { ?>
 
     <table class="table table-hover table-striped table-responsive table-bordered">
@@ -40,9 +39,7 @@ else { ?>
                 echo "<td>{$row['comment_email']}</td>";
                 echo "<td>{$post_name}</td>";
                 echo "<td>{$row['comment_content']}</td>";
-                
                 echo "<td>{$row['comment_date']}</td>";
-                
                 echo "<td>{$row['comment_status']}</td> "    ;      
                 echo "<td><a href='?source=edit&c_id={$row['comment_id']}'>Edit</a></td>";
                 echo "<td><a href='?delete={$row['comment_id']}'>Delete</a></td>";
@@ -55,23 +52,10 @@ else { ?>
                 else{
                     echo "<td><a href='?unapprove={$row['comment_id']}'>Unapprove</a></td>";
                 }
-                // echo "<td><a href='?approve={$row['comment_id']}'>Approve</a></td>";
                 echo "</tr>";
                 
             }
             ?>
-            <!-- <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mostafa</td>
-                                        <td>Pashm</td>
-                                        <td>Javascript</td>
-                                        <td>Published</td>
-                                        <td><img src="" alt=""></td>
-                                        <td>pashm,awesome</td>
-                                        <td>Mark</td>
-                                        <td>2020</td>
-                                    </tr> -->
-
         </tbody>
     </table>
 <?php } ?>

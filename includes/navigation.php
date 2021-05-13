@@ -25,7 +25,7 @@
                 echo 
                 "
                 <li>
-                    <a href='#'>{$row['cat_title']}</a>
+                    <a href='category.php?cat_id={$row['cat_id']}'>{$row['cat_title']}</a>
                 </li>
                 ";
             }

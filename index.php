@@ -48,7 +48,7 @@
             <img class='img-responsive img-rounded'  src='images/<?php echo $post_image; ?>' alt=''>
             <hr>
             <p><?php echo $post_content ?></p>
-            <a class='btn btn-primary' href='#'>Read More <span class='glyphicon glyphicon-chevron-right'></span></a>
+            <a class='btn btn-primary' href='post.php?id=<?php echo $post_id ?>'>Read More <span class='glyphicon glyphicon-chevron-right'></span></a>
 
             <hr>
             <?php } ?>
