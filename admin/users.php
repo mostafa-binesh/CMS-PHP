@@ -72,8 +72,8 @@
                             include 'includes/add_user.php';
                             break;
                         case 'edit':
-                            // include 'includes/edit_user.php';
-                            echo "<div class='alert-warning alert'>WILL BE ADDED IN FUTURE!</div>";
+                            include 'includes/edit_user.php';
+                            // echo "<div class='alert-warning alert'>WILL BE ADDED IN FUTURE!</div>";
                             break;
                         default:
                             include 'includes/view_all_users.php';

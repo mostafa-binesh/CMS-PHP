@@ -55,9 +55,11 @@ if (isset($_POST['submit'])) {
         // header("refresh:2; url=../index.php");
     } else {
         while ($row = mysqli_fetch_assoc($result)) {
-            $_SESSION['user_id'] = $row['user_id'];
+            // $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = $row['user_role'];
+            $_SESSION['firstname'] = $row['user_firstname'];
+            $_SESSION['lastname'] = $row['user_lastname'];
             // $_SESSION['username'] = $row['username'];
         }
         // echo $_SESSION['username'] , $_SESSION['role'];
