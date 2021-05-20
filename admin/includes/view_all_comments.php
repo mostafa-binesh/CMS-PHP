@@ -2,16 +2,14 @@
 if (isset($_GET['source']) && $_GET['source'] == 'unapproved') {
     $query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ORDER BY comment_id ASC";
 } else {
-    $query = "SELECT * FROM comments ORDER BY comment_id ASC";
+    $query = "SELECT * FROM comments ORDER BY comment_status DESC,comment_date DESC";
 }
 $result = mysqli_query($conn, $query);
 if (!$result) {
     echo "<h2>Couldn't fetch posts from database!</h2>";
-} else if(mysqli_num_rows($result) == 0){
-    echo "<h2>NO COMMENT FOUND</h2>";
-}
-else { ?>
-
+} else if (mysqli_num_rows($result) == 0) {
+    echo "<div class='alert alert-warning'>NO UNAPPROVED COMMENTS FOUND</div>";
+} else { ?>
     <table class="table table-hover table-striped table-responsive table-bordered">
         <thead>
             <tr>
@@ -40,20 +38,18 @@ else { ?>
                 echo "<td>{$post_name}</td>";
                 echo "<td>{$row['comment_content']}</td>";
                 echo "<td>{$row['comment_date']}</td>";
-                echo "<td>{$row['comment_status']}</td> "    ;      
+                echo "<td>{$row['comment_status']}</td> ";
                 echo "<td><a href='?source=edit&c_id={$row['comment_id']}'>Edit</a></td>";
                 echo "<td><a href='?delete={$row['comment_id']}'>Delete</a></td>";
-                if($row['comment_status'] == 'unapproved' && isset($_GET['source'])){
+                if ($row['comment_status'] == 'unapproved' && isset($_GET['source'])) {
                     $site_name = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
                     echo "<td><a href='{$site_name}&approve={$row['comment_id']}'>Approve</a></td>";
-                } else if($row['comment_status'] == 'unapproved'){
+                } else if ($row['comment_status'] == 'unapproved') {
                     echo "<td><a href='?approve={$row['comment_id']}'>Approve</a></td>";
-                } 
-                else{
+                } else {
                     echo "<td><a href='?unapprove={$row['comment_id']}'>Unapprove</a></td>";
                 }
                 echo "</tr>";
-                
             }
             ?>
         </tbody>

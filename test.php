@@ -1,4 +1,5 @@
 <?php
+include 'includes/db.php';
 if (isset($_POST['send'])) {
     // echo "Filename: " . $_FILES['file']['name'] . "<br>";
     // echo "Type : " . $_FILES['file']['type'] . "<br>";
@@ -8,6 +9,16 @@ if (isset($_POST['send'])) {
     echo $_POST['selection'];
 }
 // header('location: ?source=pashm');
+
+
+// convert database data to array
+$query = "SELECT * FROM comments";
+$result = mysqli_query($conn,$query);
+while($row[] = mysqli_fetch_assoc($result));
+foreach($row as $pashm){
+    print_r($pashm);
+    echo '<br>';    
+}
 ?>
 
 <!DOCTYPE html>

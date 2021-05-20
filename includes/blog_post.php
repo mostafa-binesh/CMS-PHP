@@ -30,7 +30,7 @@
                         <hr>
                         <img class='img-responsive img-rounded' src='images/<?php echo $post_image; ?>' alt=''>
                         <hr>
-                        <p><?php echo $post_content ?></p>
+                        <p style="text-overflow: ellipsis;"><?php echo $post_content ?></p>
                         <!-- <a class='btn btn-primary' href='#'>Read More <span class='glyphicon glyphicon-chevron-right'></span></a> -->
     
                         <hr>

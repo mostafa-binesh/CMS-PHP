@@ -49,7 +49,7 @@ if(isset($_POST['submit_comment']) && isset($_GET['id'])){
 if (isset($_GET['id'])) {
     $post_id = $_GET['id'];
 }
-$query = "SELECT * FROM comments WHERE comment_post_id = {$post_id} ORDER BY comment_id ASC"; // ASC | DESC
+$query = "SELECT * FROM comments WHERE comment_post_id = {$post_id} and comment_status = 'approved' ORDER BY comment_id ASC"; // ASC | DESC
 $result = mysqli_query($conn, $query);
 if (!$result) {
     echo "couldn't fetch the data from database!";
