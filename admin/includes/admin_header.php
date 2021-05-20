@@ -1,5 +1,17 @@
 <?php ob_start(); ?>
 <?php include "../includes/db.php"; ?>
+<?php session_start(); ?>
+<?php
+
+if(!isset($_SESSION['username'])){
+
+    echo "<div class='alert alert-warning'>Your crendital has been expired... redirecting in seconds...</div>";
+    header( "refresh:3; url=../includes/login.php" ); 
+    die();
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
