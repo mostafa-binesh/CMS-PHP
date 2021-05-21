@@ -1,5 +1,5 @@
 <?php
-if(isset($_GET['added'])){
+if (isset($_GET['added'])) {
     echo "<div class='alert alert-success'>Post added successfuly</div>";
 }
 if (isset($_POST['create_post'])) {
@@ -26,7 +26,7 @@ if (isset($_POST['create_post'])) {
         move_uploaded_file($post_image_temp, "../images/$post_image");
         // header('Location: &added=1');
     }
-}   
+}
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -43,11 +43,10 @@ if (isset($_POST['create_post'])) {
         <select class="form-control" name="category_id" id="">
             <?php
             $cat_query = "SELECT * FROM categories";
-            $cat_result = mysqli_query($conn,$cat_query);
-            if(!$cat_result){
-
-            } else{
-                while($row = mysqli_fetch_assoc($cat_result)){
+            $cat_result = mysqli_query($conn, $cat_query);
+            if (!$cat_result) {
+            } else {
+                while ($row = mysqli_fetch_assoc($cat_result)) {
                     $cat_id = $row['cat_id'];
                     $cat_title = $row['cat_title'];
                     echo "<option value={$cat_id}>{$cat_title}</option>";
@@ -63,7 +62,11 @@ if (isset($_POST['create_post'])) {
     </div>
     <div class="form-group">
         <label for="category">Post status</label>
-        <input type="text" class="form-control" name="status">
+        <!-- <input type="text" class="form-control" name="status"> -->
+        <select class="form-control" name="status">
+            <option value='published'>Published</option>
+            <option value='draft'>Draft</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="post_image">Post Image</label>
@@ -79,7 +82,13 @@ if (isset($_POST['create_post'])) {
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control " name="content" id="" cols="30" rows="10"></textarea>
+        <textarea class="form-control " name="content" id="editor" cols="30" rows="10">
+            <p>sample text</p>
+        </textarea>
+        <script src="./js/scripts.js"></script>
+        <!-- <div name="content" id="editor" style="height: 500px;"> -->
+        <!-- </div> -->
+
     </div>
 
 

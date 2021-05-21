@@ -3,10 +3,10 @@
 <?php session_start(); ?>
 <?php
 
-if(!isset($_SESSION['username'])){
+if (!isset($_SESSION['username'])) {
 
     echo "<div class='alert alert-warning'>Your crendital has been expired... redirecting in seconds...</div>";
-    header( "refresh:3; url=../includes/login.php" ); 
+    header("refresh:3; url=../includes/login.php");
     die();
 }
 
@@ -42,6 +42,17 @@ if(!isset($_SESSION['username'])){
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- editor script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <!-- <script src="./js/scripts.js"></script> -->
+    <!-- <script>
+        ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+    </script>ّ -->
 </head>
 
 <body>
