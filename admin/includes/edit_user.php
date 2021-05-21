@@ -50,16 +50,45 @@ if (isset($_POST['update_user'])) {
     //         $
     //     }
     // }
-    if ($_POST['newPassword'] == $_POST['newPassword2']) {
-        $query = "UPDATE `users` SET 
-    `user_password`='{$_POST['newPassword']}',`user_firstname`='{$_POST['firstname']}',
-    `user_lastname`='{$_POST['firstname']}',`user_email`='{$_POST['firstname']}',`user_role`='{$_POST['firstname']}' 
-    WHERE 1";
-        $result = mysqli_query($conn, $query);
-        if (!$result) {
-            echo "failed to connect to the database!";
-        } else {
-            echo "user updated successfully";
+    $query = "SELECT * FROM users WHERE user_email = '{$_POST['email']}'";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo "failed to connect to the database!";
+    // } else if (mysqli_num_rows($result) > 0 && $_POST['email'] != $row['user_email']) {
+    //     while ($row = mysqli_fetch_assoc($result)) {
+
+    //         if ($_POST['email'] == $row['user_email']) {
+    //             // no problem
+    //         } else {
+
+    //             echo "this email already exist!";
+    //         }
+    //     }
+    } else {
+        if ($_POST['newPassword'] == $_POST['newPassword2'] && !empty($_POST['newPassword'])) {
+            $query = "UPDATE `users` SET 
+        `user_password`='{$_POST['newPassword']}',`user_firstname`='{$_POST['firstname']}',
+        `user_lastname`='{$_POST['lastname']}',`user_email`='{$_POST['email']}',`user_role`='{$_POST['role']}' 
+        WHERE user_id = {$_GET['u_id']}";
+            $result = mysqli_query($conn, $query);
+            if (!$result) {
+                echo "failed to connect to the database!";
+            } else {
+                echo "<div class=' alert alert-success'>User Updated Successfully</div>";
+            }
+        } else if ($_POST['newPassword'] != $_POST['newPassword2'] && !empty($_POST['newPassword'])) {
+            echo "password and repeat password must be the same!";
+        } else if (empty($_POST['newPassword']) && !empty($_POST['newPassword2'])) {
+            $query = "UPDATE `users` SET 
+        `user_firstname`='{$_POST['firstname']}',
+        `user_lastname`='{$_POST['lastname']}',`user_email`='{$_POST['email']}',`user_role`='{$_POST['role']}' 
+        WHERE user_id = {$_GET['u_id']}";
+            $result = mysqli_query($conn, $query);
+            if (!$result) {
+                echo "failed to connect to the database!";
+            } else {
+                echo "<div class=' alert alert-success'>User Updated Successfully</div>";
+            }
         }
     }
 }
@@ -139,7 +168,7 @@ if (isset($_GET['u_id'])) {
 
 
                 <div class="form-group">
-                    <input class="btn btn-primary" type="submit" name="update_user" value="Publish Post">
+                    <input class="btn btn-primary" type="submit" name="update_user" value="Edit User">
                 </div>
 
             </form>

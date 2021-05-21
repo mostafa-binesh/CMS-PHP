@@ -1,22 +1,32 @@
 <?php
 if (isset($_POST['bulksubmit'])) {
-    echo "receiving data!";
-    foreach ($_POST['checkboxValues'] as $CBV) {
-        switch ($_POST['checkBoxOptions']) {
-            case 'publish':
-                $query = "UPDATE posts SET post_status = 'published' WHERE post_id = {$CBV}";
-                break;
-            case 'draft':
-                $query = "UPDATE posts SET post_status = 'draft' WHERE post_id = {$CBV}";
-                break;
-            case 'delete':
-                $query = "DELETE FROM posts WHERE post_id = {$CBV}";
-                break;
+    // echo "receiving data!";
+    if (isset($_POST['checkboxValues'])) {
+
+        foreach ($_POST['checkboxValues'] as $CBV) {
+            switch ($_POST['checkBoxOptions']) {
+                case 'publish':
+                    $query = "UPDATE posts SET post_status = 'published' WHERE post_id = {$CBV}";
+                    break;
+                case 'draft':
+                    $query = "UPDATE posts SET post_status = 'draft' WHERE post_id = {$CBV}";
+                    // $result = mysqli_query($conn, $query);
+                    break;
+                case 'delete':
+                    $query = "DELETE FROM posts WHERE post_id = {$CBV}";
+                    // $result = mysqli_query($conn, $query);
+                    break;
+                    // default:
+                    //     echo "<div class='alert alert-danger'>Please select an option</div>";
+                    //     break;
+            }
+            // $result = mysqli_query($conn, $query);
+            $result = mysqli_query($conn, $query);
+            // echo $CBV;
         }
-        $result = mysqli_query($conn, $query);
-        // echo $CBV;
+    } else {
+        echo "<div class='alert alert-danger'>Please select items</div>";
     }
-    // foreach
 }
 $query = "SELECT * FROM posts";
 $result = mysqli_query($conn, $query);
@@ -34,8 +44,8 @@ if (!$result) {
     </select>
     <p>pashm</p>
 </div> -->
-<!-- <button onclick="pashm()">pashm</button> -->
-<!-- <a href="#" onclick="myFunction()" class="btn btn-primary">A</a> -->
+        <!-- <button onclick="pashm()">pashm</button> -->
+        <!-- <a href="#" onclick="myFunction()" class="btn btn-primary">A</a> -->
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group">
