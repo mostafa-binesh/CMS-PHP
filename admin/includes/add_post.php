@@ -85,7 +85,7 @@ if (isset($_POST['create_post'])) {
         <textarea class="form-control " name="content" id="editor" cols="30" rows="10">
             <p>sample text</p>
         </textarea>
-        <script src="./js/scripts.js"></script>
+        <!-- <script src="./js/scripts.js"></script> -->
         <!-- <div name="content" id="editor" style="height: 500px;"> -->
         <!-- </div> -->
 

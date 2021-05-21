@@ -127,7 +127,7 @@ if (isset($_GET['p_id'])) {
     <div class="form-group">
         <label for="post_content">Post Content</label>
         <textarea class="form-control " name="content" id="editor" cols="30" rows="10"><?php echo $post_content ?></textarea>
-        <script src="./js/scripts.js"></script>
+        <!-- <script src="./js/scripts.js"></script> -->
     </div>
 
 

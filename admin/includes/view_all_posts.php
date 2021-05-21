@@ -1,33 +1,86 @@
 <?php
+if (isset($_POST['bulksubmit'])) {
+    echo "receiving data!";
+    foreach ($_POST['checkboxValues'] as $CBV) {
+        switch ($_POST['checkBoxOptions']) {
+            case 'publish':
+                $query = "UPDATE posts SET post_status = 'published' WHERE post_id = {$CBV}";
+                break;
+            case 'draft':
+                $query = "UPDATE posts SET post_status = 'draft' WHERE post_id = {$CBV}";
+                break;
+            case 'delete':
+                $query = "DELETE FROM posts WHERE post_id = {$CBV}";
+                break;
+        }
+        $result = mysqli_query($conn, $query);
+        // echo $CBV;
+    }
+    // foreach
+}
 $query = "SELECT * FROM posts";
 $result = mysqli_query($conn, $query);
 if (!$result) {
     echo "<h2>Couldn't fetch posts from database!</h2>";
 } else { ?>
+    <form action="" method="POST">
 
-    <table class="table table-hover table-striped table-responsive table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-                <th scope="col">Category</th>
-                <th scope="col">Date</th>
-                <th scope="col">Image</th>
-                <th scope="col">Tags</th>
-                <th scope="col">Comments</th>
-                <th scope="col">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            while ($row = mysqli_fetch_assoc($result)) {
-                $cat_query = "SELECT * FROM categories WHERE cat_id = {$row['post_category_id']}";
-                $cat_result = mysqli_query($conn, $cat_query);
-                while ($cat_row = mysqli_fetch_assoc($cat_result)) {
-                    $post_cat_name = $cat_row['cat_title'];
-                }
-                echo "<tr>
+        <!-- <div class="form-group">
+    <select class="form-control" name="" id="">
+        <option value="">1</option>
+        <option value="">1</option>
+        <option value="">1</option>
+        <option value="">1</option>
+    </select>
+    <p>pashm</p>
+</div> -->
+<!-- <button onclick="pashm()">pashm</button> -->
+<!-- <a href="#" onclick="myFunction()" class="btn btn-primary">A</a> -->
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <select class="form-control" name="checkBoxOptions" id="">
+                        <option value="">Select</option>
+                        <option value="publish">Publish</option>
+                        <option value="draft">Draft</option>
+                        <option value="delete"">Delete</option>
+    </select>
+    
+</div>
+  </div>
+  <div class=" col-xs-6">
+                            <input name="bulksubmit" type="submit" class="btn btn-primary" value="Apply">
+                            <input type="button" class="btn btn-info" value="New Post">
+                </div>
+            </div>
+
+            <table class="table table-hover table-striped table-responsive table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col"><input onclick="selects(this)" type="checkbox"></th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Tags</th>
+                        <th scope="col">Comments</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $post_id = $row['post_id'];
+                        $cat_query = "SELECT * FROM categories WHERE cat_id = {$row['post_category_id']}";
+                        $cat_result = mysqli_query($conn, $cat_query);
+                        while ($cat_row = mysqli_fetch_assoc($cat_result)) {
+                            $post_cat_name = $cat_row['cat_title'];
+                        }
+
+                        echo "<tr>
+                <th scope='row'><input class='checkBoxes' value={$post_id} id='check' name='checkboxValues[]' type='checkbox'></th>
                 <th scope='row'>{$row['post_id']}</th>
                 <td>{$row['post_title']}</td>
                 <td>{$row['post_author']}</td>
@@ -39,11 +92,13 @@ if (!$result) {
                 <td>{$row['post_status']}</td>           
                 <td><a href='?source=edit&p_id={$row['post_id']}'>Edit</a></td>
                 <td><a href='?delete={$row['post_id']}'>Delete</a></td>
+                <td><a href='../post.php?id={$row['post_id']}'>View</a></td>
                 </tr>
                 ";
-            }
-            ?>
-            <!-- <tr>
+                    }
+                    ?>
+
+                    <!-- <tr>
                                         <th scope="row">1</th>
                                         <td>Mostafa</td>
                                         <td>Pashm</td>
@@ -55,6 +110,7 @@ if (!$result) {
                                         <td>2020</td>
                                     </tr> -->
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+    </form>
 <?php } ?>

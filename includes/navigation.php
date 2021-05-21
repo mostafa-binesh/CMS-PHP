@@ -34,8 +34,17 @@
                         <a href='./admin'>Admin Panel</a>
                     </li>
                     ";
+                    if(isset($_GET['id'])){
+                        echo
+                        "
+                        <li>
+                            <a href='./admin/posts.php?source=edit&p_id={$_GET['id']}'>Edit Post</a>
+                        </li>
+                        ";
+                    }
                 }
                 ?>
+                
 
 
                 <!-- <li>

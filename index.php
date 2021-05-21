@@ -19,7 +19,7 @@
 
             <!-- First Blog Post -->
             <?php
-            $query = "SELECT * FROM posts";
+            $query = "SELECT * FROM posts WHERE post_status = 'published'";
             $result = mysqli_query($conn,$query);
             while($row = mysqli_fetch_assoc($result)){
                 $post_id = $row['post_id'];
