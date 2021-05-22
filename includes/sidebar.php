@@ -76,9 +76,16 @@
         </div>
         <div class="well text-center">
             <h2>Links</h2>
-            <a href="registration.php">Registration</a>
+            <a class="btn btn-primary" href="registration.php">Registration</a>
+        </div>
+    <?php } else{
+        ?>
+        <div class="well text-center">
+            <a href="./admin/includes/logout.php" class="btn btn-warning text-center center-block">Logout</a>
         </div>
     <?php } ?>
+    
+    
 
 
 

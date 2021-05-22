@@ -21,7 +21,9 @@ if(isset($_POST['submit_comment']) && isset($_GET['id'])){
 
 <div class="well">
     <h4>Leave a Comment:</h4>
-    <form action="" method="POST" role="form">
+    <?php
+    if(!isset($_SESSION['username'])){  ?>
+        <form action="" method="POST" role="form">
         <div class="form-group">
             <label for="exampleInputEmail1">Name:</label>
             <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -39,6 +41,27 @@ if(isset($_POST['submit_comment']) && isset($_GET['id'])){
         <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
         <input name="submit_comment" class="btn btn-primary" type="submit" value="submit">
     </form>
+    <?php
+    } else{ ?>
+        <form action="" method="POST" role="form">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name:</label>
+            <input value="<?=$_SESSION['firstname'] . ' ' . $_SESSION['lastname']?>" name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email:</label>
+            <input value="<?=$_SESSION['email']?>" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Content:</label>
+            <textarea name="content" class="form-control" rows="3"></textarea>
+        </div>
+        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+        <input name="submit_comment" class="btn btn-primary" type="submit" value="submit">
+    </form>
+    <?php } ?>
 </div>
 
 <hr>
@@ -69,6 +92,7 @@ if (!$result) {
      <?php }
 } 
 ?>
+<!-- <div>pashm</div> -->
 
 
 

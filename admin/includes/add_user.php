@@ -22,6 +22,7 @@ if (isset($_POST['add_user'])) {
     } else {
 
         if($add_password == $add_password2){
+            $add_password = password_hash($add_password , PASSWORD_ARGON2ID);
             $query = "INSERT INTO 
         `users`(`username`, `user_password`, `user_firstname`, `user_lastname`, `user_email`, `user_image`, `user_role`) 
         VALUES ('{$add_username}','{$add_password}','{$add_fn}','{$add_ln}','{$add_email}','pashm.png','{$add_role}')";
@@ -42,11 +43,11 @@ if (isset($_POST['add_user'])) {
 
     <div class="form-group">
         <label for="title">Username</label>
-        <input placeholder="username" type="text" class="form-control" name="username">
+        <input  placeholder="username" type="text" class="form-control" name="username" required>
     </div>
     <div class="form-group">
         <label for="title">Email Address</label>
-        <input placeholder="Email" type="text" class="form-control" name="email">
+        <input placeholder="Email" type="text" class="form-control" name="email" required>
     </div>
     <div class="form-group">
         <label for="title">First Name</label>
@@ -68,11 +69,11 @@ if (isset($_POST['add_user'])) {
     </div>
     <div class="form-group">
         <label for="title">Password</label>
-        <input placeholder="Email" type="password" class="form-control" name="password">
+        <input placeholder="Email" type="password" class="form-control" name="password" required>
     </div>
     <div class="form-group">
         <label for="title">Repeat Password</label>
-        <input placeholder="Email" type="password" class="form-control" name="password2">
+        <input placeholder="Email" type="password" class="form-control" name="password2" required>
     </div>
     
     <div class="form-group">

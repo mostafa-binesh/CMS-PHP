@@ -4,10 +4,16 @@
 <?php
 
 if (!isset($_SESSION['username'])) {
-
+    
     echo "<div class='alert alert-warning'>Your crendital has been expired... redirecting in seconds...</div>";
     header("refresh:3; url=../includes/login.php");
     die();
+} else if(isset($_SESSION['username']) && $_SESSION['role'] != 'admin'){
+    // if () {
+        echo "only admins can access to this dir";
+        header("refresh:2; url=../index.php");
+        die();
+    // }
 }
 
 

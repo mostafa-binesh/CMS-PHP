@@ -55,8 +55,9 @@ if (isset($_POST['submit'])) {
         // header("refresh:2; url=../index.php");
     } else {
         while ($row = mysqli_fetch_assoc($result)) {
-            // $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
+            $_SESSION['email'] = $row['user_email'];
             $_SESSION['role'] = $row['user_role'];
             $_SESSION['firstname'] = $row['user_firstname'];
             $_SESSION['lastname'] = $row['user_lastname'];
@@ -68,7 +69,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
             <h1>Login Page</h1>
-            <form method="POST" action="">
+            <form method="POST" action="./loginprocess.php">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
                     <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -84,6 +85,8 @@ if (isset($_POST['submit'])) {
                 <!-- </div> -->
                 <button name="submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
+            <br>
+            <a class="btn btn-primary text-center" href="../index.php">GO TO HOMEPAGE</a>
         </div>
     </div>
 </body>

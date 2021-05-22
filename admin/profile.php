@@ -79,17 +79,32 @@
                         //         $
                         //     }
                         // }
-                        if ($_POST['newPassword'] == $_POST['newPassword2']) {
+                        if ($_POST['newPassword'] == $_POST['newPassword2'] && !empty($_POST['newPassword'])) {
+                            $password = password_hash($_POST['newPassword'], PASSWORD_ARGON2ID);
                             $query = "UPDATE `users` SET 
-    `user_password`='{$_POST['newPassword']}',`user_firstname`='{$_POST['firstname']}',
-    `user_lastname`='{$_POST['firstname']}',`user_email`='{$_POST['firstname']}',`user_role`='{$_POST['firstname']}' 
-    WHERE 1";
+    `user_password`='{$password}',`user_firstname`='{$_POST['firstname']}',
+    `user_lastname`='{$_POST['lastname']}',`user_email`='{$_POST['email']}',`user_role`='{$_POST['role']}' 
+    WHERE user_id =  {$_SESSION['user_id']}";
                             $result = mysqli_query($conn, $query);
                             if (!$result) {
                                 echo "failed to connect to the database!";
                             } else {
                                 echo "user updated successfully";
                             }
+                        } else if($_POST['newPassword'] == $_POST['newPassword2'] && empty($_POST['newPassword'])){
+                            
+                                $password = password_hash($_POST['newPassword'], PASSWORD_ARGON2ID);
+                                $query = "UPDATE `users` SET 
+        `user_firstname`='{$_POST['firstname']}',
+        `user_lastname`='{$_POST['lastname']}',`user_email`='{$_POST['email']}',`user_role`='{$_POST['role']}' 
+        WHERE user_id =  {$_SESSION['user_id']}";
+                                $result = mysqli_query($conn, $query);
+                                if (!$result) {
+                                    echo "failed to connect to the database!";
+                                } else {
+                                    echo "user updated successfully";
+                                }
+                            
                         }
                     }
 
@@ -168,7 +183,7 @@
 
 
                                     <div class="form-group">
-                                        <input class="btn btn-primary" type="submit" name="update_user" value="Publish Post">
+                                        <input class="btn btn-primary" type="submit" name="update_user" value="Update Post">
                                     </div>
 
                                 </form>

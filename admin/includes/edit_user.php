@@ -66,19 +66,20 @@ if (isset($_POST['update_user'])) {
     //     }
     } else {
         if ($_POST['newPassword'] == $_POST['newPassword2'] && !empty($_POST['newPassword'])) {
+            $password = password_hash($_POST['newPassword'], PASSWORD_ARGON2ID);
             $query = "UPDATE `users` SET 
-        `user_password`='{$_POST['newPassword']}',`user_firstname`='{$_POST['firstname']}',
+        `user_password`='{$password}',`user_firstname`='{$_POST['firstname']}',
         `user_lastname`='{$_POST['lastname']}',`user_email`='{$_POST['email']}',`user_role`='{$_POST['role']}' 
         WHERE user_id = {$_GET['u_id']}";
             $result = mysqli_query($conn, $query);
             if (!$result) {
                 echo "failed to connect to the database!";
             } else {
-                echo "<div class=' alert alert-success'>User Updated Successfully</div>";
+                echo "<div class=' alert alert-success'>User Updated Successfully 1</div>";
             }
         } else if ($_POST['newPassword'] != $_POST['newPassword2'] && !empty($_POST['newPassword'])) {
             echo "password and repeat password must be the same!";
-        } else if (empty($_POST['newPassword']) && !empty($_POST['newPassword2'])) {
+        } else if (empty($_POST['newPassword']) && empty($_POST['newPassword2'])) {
             $query = "UPDATE `users` SET 
         `user_firstname`='{$_POST['firstname']}',
         `user_lastname`='{$_POST['lastname']}',`user_email`='{$_POST['email']}',`user_role`='{$_POST['role']}' 
@@ -87,7 +88,7 @@ if (isset($_POST['update_user'])) {
             if (!$result) {
                 echo "failed to connect to the database!";
             } else {
-                echo "<div class=' alert alert-success'>User Updated Successfully</div>";
+                echo "<div class=' alert alert-success'>User Updated Successfully 2</div>";
             }
         }
     }
