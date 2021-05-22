@@ -1,5 +1,5 @@
 <?php
-// include_once '../../includes/db.php';
+include_once '../../includes/db.php';
 if (isset($_POST['bulksubmit'])) {
     // echo "receiving data!";
     if (isset($_POST['checkboxValues']) && $_POST['checkBoxOptions'] != 'select') {
@@ -48,6 +48,7 @@ if (!$result) {
 </div> -->
         <!-- <button onclick="pashm()">pashm</button> -->
         <!-- <a href="#" onclick="myFunction()" class="btn btn-primary">A</a> -->
+
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group">
@@ -103,12 +104,33 @@ if (!$result) {
                 <td>{$row['post_comment_count']}</td>
                 <td>{$row['post_status']}</td>           
                 <td><a href='?source=edit&p_id={$row['post_id']}'>Edit</a></td>
-                <td><a onclick=\"javascript: return confirm('Are u sure?')\"  href='?delete={$row['post_id']}'>Delete</a></td>
+                <td><a value='{$post_id}' onclick=\" ajaxdelete('{$row['post_id']}') \" >Delete</a></td>
                 <td><a href='../post.php?id={$row['post_id']}'>View</a></td>
                 </tr>
                 ";
                     }
                     ?>
+                    <!-- <script>
+                        function ajaxdelete() {
+                            $.ajax({
+                                type: 'POST',
+                                url: 'includes/ajaxdelete.php',
+                                data: {
+                                    ss: 'pashm',
+                                    aa: 'gholvagir'
+                                },
+                                success: function(data) {
+                                    if (currentData != data) {
+                                        $('#notification').html(data);
+                                        // currentData = data;
+                                        // pashm++;
+                                        // console.log(pashm);
+                                    }
+                                }
+                            });
+                              alert('page refreshed');
+                        }
+                    </script> -->
                     <!-- <td><a onclick='Confirm('are you sure')' href='?delete={$row['post_id']}'>Delete</a></td> -->
                     <!-- <tr>
                                         <th scope="row">1</th>
