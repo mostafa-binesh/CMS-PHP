@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['bulksubmit'])) {
     // echo "receiving data!";
-    if (isset($_POST['checkboxValues'])) {
+    if (isset($_POST['checkboxValues']) && $_POST['checkBoxOptions'] != 'select') {
 
         foreach ($_POST['checkboxValues'] as $CBV) {
             switch ($_POST['checkBoxOptions']) {
@@ -22,10 +22,11 @@ if (isset($_POST['bulksubmit'])) {
             }
             // $result = mysqli_query($conn, $query);
             $result = mysqli_query($conn, $query);
+            // echo 'option is:' .  $_POST['checkBoxOptions'];
             // echo $CBV;
         }
     } else {
-        echo "<div class='alert alert-danger'>Please select items</div>";
+        echo "<div class='alert alert-danger'>Please control the entries</div>";
     }
 }
 $query = "SELECT * FROM posts";
@@ -50,7 +51,7 @@ if (!$result) {
             <div class="col-xs-6">
                 <div class="form-group">
                     <select class="form-control" name="checkBoxOptions" id="">
-                        <option value="">Select</option>
+                        <option value="select">Select</option>
                         <option value="publish">Publish</option>
                         <option value="draft">Draft</option>
                         <option value="delete"">Delete</option>

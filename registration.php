@@ -30,6 +30,7 @@
                                 } else if (mysqli_num_rows($result) > 0) {
                                     echo "<div class=' alert alert-danger'>SUCH USERNAME OR PASSWORD ALREADY EXIST!</div>";
                                 } else {
+                                    $password = password_hash($password,PASSWORD_ARGON2ID);
                                     $query = "INSERT INTO 
                                     `users`(`username`, `user_password`, `user_firstname`, `user_lastname`, `user_email`, `user_role`) 
                                     VALUES ('{$username}','{$password}','{$firstname}','{$lastname}','{$email}','subscriber')";
