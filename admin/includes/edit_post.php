@@ -1,5 +1,5 @@
 <?php
-
+$smalltxt = "pashm";
 if (isset($_POST['update_post'])) {
     $post_id = $_GET['p_id'];
     $post_title = $_POST['title'];

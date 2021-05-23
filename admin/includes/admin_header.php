@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
     // }
 }
 
-
+// $page_title = "ADMIN PANEL";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,8 @@ if (!isset($_SESSION['username'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <!-- <title>SB Admin - Bootstrap Admin Template</title> -->
+    <title><?=$page_title?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -51,6 +52,8 @@ if (!isset($_SESSION['username'])) {
 
     <!-- editor script -->
     <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- <script src="./js/scripts.js"></script> -->
     <!-- <script>
         ClassicEditor

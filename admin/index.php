@@ -1,3 +1,4 @@
+<?php $page_title = "ADMIN PANEL"?>
 <?php include "includes/admin_header.php"; ?>
 
 
