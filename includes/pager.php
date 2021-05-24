@@ -1,10 +1,15 @@
 <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
-            </ul>
+<?php
 
-        </div>
+for($i = 1;$i <= $page_count;$i++){
+    echo "
+    <li>
+            <a href='index.php?page={$i}'>{$i}</a>
+        </li>
+    ";
+}
+
+?>
+</ul>
+
+</div>

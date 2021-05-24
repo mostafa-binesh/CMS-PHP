@@ -19,9 +19,23 @@
 
             <!-- First Blog Post -->
             <?php
+            // vars
+            $post_per_page = 5;
+            // get page info
+            if(isset($_GET['page'])){
+                $page = $_GET['page'];
+            } else{
+                $page = 1;
+            }
             $query = "SELECT * FROM posts WHERE post_status = 'published'";
             $result = mysqli_query($conn,$query);
-            while($row = mysqli_fetch_assoc($result)){
+            $page_count = mysqli_num_rows($result);
+            $page_count = ceil($page_count / $post_per_page);
+            // echo "pashm count is {$page_count}";
+            $page_post_from = ($page * $post_per_page) - $post_per_page;
+            $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $page_post_from,$post_per_page";
+            $resulty = mysqli_query($conn,$query);
+            while($row = mysqli_fetch_assoc($resulty)){
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
                 $post_author = $row['post_author'];
