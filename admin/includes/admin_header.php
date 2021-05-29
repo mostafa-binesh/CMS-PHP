@@ -1,5 +1,6 @@
 <?php ob_start(); ?>
 <?php include "../includes/db.php"; ?>
+<?php include "functions.php" ?>
 <?php session_start(); ?>
 <?php
 
@@ -14,6 +15,10 @@ if (!isset($_SESSION['username'])) {
         header("refresh:2; url=../index.php");
         die();
     // }
+} else{
+    $last_online_time = time();
+    $query = "UPDATE users SET last_time = {$last_online_time} WHERE user_id = {$_SESSION['user_id']}";
+    $result = mysqli_query($conn,$query);
 }
 
 // $page_title = "ADMIN PANEL";
@@ -30,7 +35,15 @@ if (!isset($_SESSION['username'])) {
     <meta name="author" content="">
 
     <!-- <title>SB Admin - Bootstrap Admin Template</title> -->
-    <title><?=$page_title?></title>
+    <title>
+    <?php
+    if(!isset($page_title)){
+        echo "ADMIN PANEL";
+    } else{
+        echo $page_title;
+    }
+    ?>
+    </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -52,6 +65,7 @@ if (!isset($_SESSION['username'])) {
 
     <!-- editor script -->
     <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- <script src="./js/scripts.js"></script> -->
