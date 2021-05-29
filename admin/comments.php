@@ -29,13 +29,13 @@
 
                     <?php
                     if (isset($_GET['delete'])) {
-
+                        # delete comment function
                         $query = "SELECT * FROM comments WHERE comment_id = {$_GET['delete']}";
-                        $result = mysqli_query($conn,$query);
-                        if(!$result){
+                        $result = mysqli_query($conn, $query);
+                        if (!$result) {
                             die("pashm");
                         }
-                        while($row = mysqli_fetch_assoc($result)){
+                        while ($row = mysqli_fetch_assoc($result)) {
                             $comment_owner = $row['comment_post_id'];
                         }
                         $query = "DELETE FROM comments WHERE comment_id = {$_GET['delete']}";
@@ -87,6 +87,7 @@
                             break;
                         default:
                             include 'includes/view_all_comments.php';
+                            break;
                     }
                     ?>
 
@@ -104,5 +105,4 @@
 
 </div>
 <!-- /#wrapper -->
-
 <?php include "includes/admin_footer.php"; ?>
