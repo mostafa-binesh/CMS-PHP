@@ -1,5 +1,20 @@
-<?php include "includes/db.php";
-session_start(); ?>
+<?php include_once "includes/db.php";
+session_start(); 
+$post_per_page = 5;
+// online users config
+
+if(isset($_SESSION['username'])){
+    $last_online_time = time();
+    $query = "UPDATE users SET last_time = {$last_online_time} WHERE user_id = {$_SESSION['user_id']}";
+    $result = mysqli_query($conn,$query);
+}
+
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +26,7 @@ session_start(); ?>
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title><?=$title?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
