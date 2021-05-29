@@ -29,30 +29,43 @@
 
                     <?php
                     if (isset($_GET['delete'])) {
-                        
+
+                        $query = "SELECT * FROM comments WHERE comment_id = {$_GET['delete']}";
+                        $result = mysqli_query($conn,$query);
+                        if(!$result){
+                            die("pashm");
+                        }
+                        while($row = mysqli_fetch_assoc($result)){
+                            $comment_owner = $row['comment_post_id'];
+                        }
                         $query = "DELETE FROM comments WHERE comment_id = {$_GET['delete']}";
                         $result = mysqli_query($conn, $query);
                         if (!$result) {
                             echo "<div class='alert alert-danger'>FAILED TO DELETE THE COMMENT WITH ID = {$_GET['delete']}</div>";
                         } else {
-                            echo "<div class='alert alert-success'>COMMENT SUCCESSFULLY REMOVED</div>";
+                            $query = "UPDATE posts SET post_comment_count = post_comment_count - 1 WHERE post_id = {$comment_owner}";
+                            $result = mysqli_query($conn, $query);
+                            if ($result) {
+
+                                echo "<div class='alert alert-success'>COMMENT SUCCESSFULLY REMOVED</div>";
+                            }
                         }
                     }
-                    if(isset($_GET['approve'])){
+                    if (isset($_GET['approve'])) {
                         $comment_id = $_GET['approve'];
                         $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$comment_id}";
-                        $result = mysqli_query($conn,$query);
-                        if(!$result){
+                        $result = mysqli_query($conn, $query);
+                        if (!$result) {
                             echo "<div class='alert alert-warning'>COULD NOT APPROVE THE COMMENT WITH ID = {$comment_id}</div>";
                         } else {
                             echo "<div class='alert alert-success'>COMMENT SUCCESSFULLY APPROVED</div>";
                         }
                     }
-                    if(isset($_GET['unapprove'])){
+                    if (isset($_GET['unapprove'])) {
                         $comment_id = $_GET['unapprove'];
                         $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {$comment_id}";
-                        $result = mysqli_query($conn,$query);
-                        if(!$result){
+                        $result = mysqli_query($conn, $query);
+                        if (!$result) {
                             echo "<div class='alert alert-warning'>COULD NOT UNAPPROVE THE COMMENT WITH ID = {$comment_id}</div>";
                         } else {
                             echo "<div class='alert alert-success'>COMMENT SUCCESSFULLY UNAPPROVED</div>";
@@ -64,11 +77,11 @@
                         $source = '';
                     }
                     switch ($source) {
-                        // case 'unapproved':
-                        //     // code here
-                        //     # code here
-                        //     include 'includes/unapproveds.php';
-                        //     break;
+                            // case 'unapproved':
+                            //     // code here
+                            //     # code here
+                            //     include 'includes/unapproveds.php';
+                            //     break;
                         case 'edit':
                             include 'includes/edit_comment.php';
                             break;
