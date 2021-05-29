@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <?php
 include_once '../../includes/db.php';
 if (isset($_POST['bulksubmit'])) {
@@ -103,8 +104,8 @@ if (!$result) {
                 <td>{$row['post_tags']}</td>
                 <td>{$row['post_comment_count']}</td>
                 <td>{$row['post_status']}</td>           
-                <td><a href='?source=edit&p_id={$row['post_id']}'>Edit</a></td>
-                <td><a value='{$post_id}' onclick=\" ajaxdelete('{$row['post_id']}') \" >Delete</a></td>
+                <td><a href='./posts.php?source=edit&p_id={$row['post_id']}'>Edit</a></td>
+                <td><a href='javascript:;''  name='delete' value='{$post_id}' onclick=\" ajaxdelete('{$row['post_id']}') \" >Delete</a></td>
                 <td><a href='../post.php?id={$row['post_id']}'>View</a></td>
                 </tr>
                 ";
