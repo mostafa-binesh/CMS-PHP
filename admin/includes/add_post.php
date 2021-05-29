@@ -98,3 +98,40 @@ if (isset($_POST['create_post'])) {
     </div>
 
 </form>
+<script>
+ClassicEditor.defaultConfig = {
+      toolbar: {
+        items: [
+          'heading',
+          '|',
+          'bold',
+          'italic',
+          'blockQuote',
+          '|',
+          'link',
+          '|',
+          'bulletedList',
+          'numberedList',
+          '|',
+          'insertTable',
+        //   '|',
+        //   'imageUpload',
+          '|',
+          'undo',
+          'redo'
+        ]
+      },
+      image: {
+        toolbar: [
+          'imageStyle:full',
+          'imageStyle:side',
+          '|',
+          'imageTextAlternative'
+        ]
+      },
+      table: {
+        contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+      },
+      language: 'en'
+    };
+</script>
