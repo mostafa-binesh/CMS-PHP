@@ -1,4 +1,25 @@
-<?php include "includes/admin_header.php"; ?>
+<?php
+$page_title = "users";
+switch ($_GET['source']) {
+        // case 'unapproved':
+        //     // code here
+        //     # code here
+        //     include 'includes/unapproveds.php';
+        //     break;
+    case 'add_user':
+        $page_title = "add users";
+        break;
+    case 'edit':
+        $page_title = "edit user";
+        // echo "<div class='alert-warning alert'>WILL BE ADDED IN FUTURE!</div>";
+        break;
+    case 'online_users':
+        $page_title = "online users";
+        break;
+    default:
+        $page_title = "users";
+}
+include "includes/admin_header.php"; ?>
 
 
 
@@ -28,12 +49,12 @@
 
 
                     <?php
-                    if(isset($_GET['delete'])){
+                    if (isset($_GET['delete'])) {
                         $query = "DELETE FROM users WHERE user_id = {$_GET['delete']}";
-                        $result = mysqli_query($conn,$query);
-                        if(!$result){
+                        $result = mysqli_query($conn, $query);
+                        if (!$result) {
                             echo "<div class='alert alert-warning'>Couldn't send the delete request!</div>";
-                        } else{
+                        } else {
                             echo "<div class='alert alert-success'>User removed successfully!</div>";
                         }
                     }
@@ -63,17 +84,20 @@
                         $source = '';
                     }
                     switch ($source) {
-                        // case 'unapproved':
-                        //     // code here
-                        //     # code here
-                        //     include 'includes/unapproveds.php';
-                        //     break;
+                            // case 'unapproved':
+                            //     // code here
+                            //     # code here
+                            //     include 'includes/unapproveds.php';
+                            //     break;
                         case 'add_user':
                             include 'includes/add_user.php';
                             break;
                         case 'edit':
                             include 'includes/edit_user.php';
                             // echo "<div class='alert-warning alert'>WILL BE ADDED IN FUTURE!</div>";
+                            break;
+                        case 'online_users':
+                            include 'includes/online_users.php';
                             break;
                         default:
                             include 'includes/view_all_users.php';
