@@ -79,6 +79,7 @@ if (!$result) {
                         <th scope="col">Tags</th>
                         <th scope="col">Comments</th>
                         <th scope="col">Status</th>
+                        
                     </tr>
                 </thead>
                 <tbody>

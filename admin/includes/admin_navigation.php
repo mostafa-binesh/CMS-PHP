@@ -127,6 +127,9 @@
                         <a href="./posts.php">All posts</a>
                     </li>
                     <li>
+                        <a href="./ps.php">All posts AJAX</a>
+                    </li>
+                    <li>
                         <a href="./posts.php?source=add_post">Add a new post</a>
                     </li>
                 </ul>
@@ -156,6 +159,9 @@
                     </li>
                     <li>
                         <a href="users.php?source=add_user">Add a new user</a>
+                    </li>
+                    <li>
+                        <a href="users.php?source=online_users">Online Users</a>
                     </li>
                 </ul>
             </li>

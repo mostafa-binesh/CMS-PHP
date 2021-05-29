@@ -61,10 +61,13 @@ if (isset($_POST['submit'])) {
             $_SESSION['role'] = $row['user_role'];
             $_SESSION['firstname'] = $row['user_firstname'];
             $_SESSION['lastname'] = $row['user_lastname'];
+            // $_SESSION['last_time'] = time();
+
+            
+            header('location: ../admin');
             // $_SESSION['username'] = $row['username'];
         }
         // echo $_SESSION['username'] , $_SESSION['role'];
-        header('location: ../admin');
     }
 }
 ?>

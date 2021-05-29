@@ -18,9 +18,11 @@
 
             <!-- First Blog Post -->
             <?php
+
             if (isset($_GET['cat_id'])) {
                 $query = "SELECT * FROM posts WHERE post_category_id = {$_GET['cat_id']}";
                 $result = mysqli_query($conn, $query);
+                $page_count = ceil(mysqli_num_rows($result) / $post_per_page);
                 while ($row = mysqli_fetch_assoc($result)) {
                     $post_id = $row['post_id'];
                     $post_title = $row['post_title'];
@@ -28,7 +30,6 @@
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_content = substr($row['post_content'], 0, 100);
-
                     // $post_title = $row['post_title'];
                     // $post_title = $row['post_title'];
                     // $post_title = $row['post_title'];
@@ -56,15 +57,22 @@
             }
             ?>
             <!-- Pager -->
-            <?php include "includes/pager.php" ?>
+            <?php
+            if ($page_count > 1) {
+
+                include "includes/pager.php";
+            }
+            ?>
+
+        </div>
+        <!-- Blog Sidebar Widgets Column -->
+        <?php include "includes/sidebar.php"
+        #pagination bug here 
+        ?>
+        <!-- /.row -->
 
 
-            <!-- Blog Sidebar Widgets Column -->
-            <?php include "includes/sidebar.php" ?>
-            <!-- /.row -->
 
+        <!-- Footer -->
 
-
-            <!-- Footer -->
-
-            <?php include "includes/footer.php" ?>
+        <?php include "includes/footer.php" ?>

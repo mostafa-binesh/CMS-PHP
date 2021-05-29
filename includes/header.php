@@ -8,12 +8,6 @@ if(isset($_SESSION['username'])){
     $query = "UPDATE users SET last_time = {$last_online_time} WHERE user_id = {$_SESSION['user_id']}";
     $result = mysqli_query($conn,$query);
 }
-
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
