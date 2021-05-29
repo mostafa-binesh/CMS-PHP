@@ -2,7 +2,9 @@
 
 
 
-
+<?php
+$smalltxt = "All posts shown here";
+?>
 <div id="wrapper">
     
     <!-- Navigation -->
@@ -21,7 +23,8 @@
                         
                         
                         All posts
-                        <small>All posts shown here</small>
+                        <!-- <small>All posts shown here</small> -->
+                        <small><?=$smalltxt?></small>
                     </h1>
                     <?php
 

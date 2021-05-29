@@ -1,3 +1,19 @@
+
+<?php
+include_once "includes/db.php";
+if(isset($_GET['id'])){
+    $query = "SELECT * FROM posts WHERE post_id = {$_GET['id']}";
+    $result = mysqli_query($conn,$query);
+    if($result){
+        while($row = mysqli_fetch_assoc($result)){
+            $title = $row['post_title'];
+        }
+    }
+    else {
+        echo "problem happend";
+    }
+}
+?>
 <?php include 'includes/header.php' ?>
 
 <!-- Navigation -->
