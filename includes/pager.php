@@ -11,5 +11,3 @@ for($i = 1;$i <= $page_count;$i++){
 
 ?>
 </ul>
-
-</div>
