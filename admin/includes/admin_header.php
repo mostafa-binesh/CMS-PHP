@@ -5,20 +5,20 @@
 <?php
 
 if (!isset($_SESSION['username'])) {
-    
+
     echo "<div class='alert alert-warning'>Your crendital has been expired... redirecting in seconds...</div>";
     header("refresh:3; url=../includes/login.php");
     die();
-} else if(isset($_SESSION['username']) && $_SESSION['role'] != 'admin'){
+} else if (isset($_SESSION['username']) && $_SESSION['role'] != 'admin') {
     // if () {
-        echo "only admins can access to this dir";
-        header("refresh:2; url=../index.php");
-        die();
+    echo "only admins can access to this dir";
+    header("refresh:2; url=../index.php");
+    die();
     // }
-} else{
+} else {
     $last_online_time = time();
     $query = "UPDATE users SET last_time = {$last_online_time} WHERE user_id = {$_SESSION['user_id']}";
-    $result = mysqli_query($conn,$query);
+    $result = mysqli_query($conn, $query);
 }
 
 // $page_title = "ADMIN PANEL";
@@ -36,13 +36,13 @@ if (!isset($_SESSION['username'])) {
 
     <!-- <title>SB Admin - Bootstrap Admin Template</title> -->
     <title>
-    <?php
-    if(!isset($page_title)){
-        echo "ADMIN PANEL";
-    } else{
-        echo $page_title;
-    }
-    ?>
+        <?php
+        if (!isset($page_title)) {
+            echo "ADMIN PANEL";
+        } else {
+            echo $page_title;
+        }
+        ?>
     </title>
 
     <!-- Bootstrap Core CSS -->

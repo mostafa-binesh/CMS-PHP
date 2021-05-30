@@ -1,6 +1,7 @@
 <?php
 $page_title = "users";
-switch ($_GET['source']) {
+if(isset($_GET['source'])){
+    switch ($_GET['source']) {
         // case 'unapproved':
         //     // code here
         //     # code here
@@ -18,6 +19,7 @@ switch ($_GET['source']) {
         break;
     default:
         $page_title = "users";
+}
 }
 include "includes/admin_header.php"; ?>
 
