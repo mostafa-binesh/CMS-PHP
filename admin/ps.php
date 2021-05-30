@@ -71,11 +71,12 @@
                                 },
                                 success: function(data) {
                                     $('#notification').html(data);
-                                    auto_load();
+                                    $("tr[value='" + id + "']").fadeOut(200);
+                                    // auto_load();
                                 }
                             });
                             // alert('page refreshed');
-                            auto_load();
+                            // auto_load();
                         }
                     </script>
                     <!-- <button onclick="auto_load()">Button</button> -->
@@ -111,3 +112,4 @@
 </div>
 <!-- /#wrapper -->
 <?php include "includes/admin_footer.php"; ?>
+<!-- <script type="text/javascript" src="./js/scripts.js"></script> -->

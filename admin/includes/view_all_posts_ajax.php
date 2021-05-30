@@ -1,4 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <?php
 include_once '../../includes/db.php';
 if (isset($_POST['bulksubmit'])) {
@@ -6,6 +5,7 @@ if (isset($_POST['bulksubmit'])) {
     if (isset($_POST['checkboxValues']) && $_POST['checkBoxOptions'] != 'select') {
 
         foreach ($_POST['checkboxValues'] as $CBV) {
+            // $cbv is post id
             switch ($_POST['checkBoxOptions']) {
                 case 'publish':
                     $query = "UPDATE posts SET post_status = 'published' WHERE post_id = {$CBV}";
@@ -15,7 +15,8 @@ if (isset($_POST['bulksubmit'])) {
                     // $result = mysqli_query($conn, $query);
                     break;
                 case 'delete':
-                    $query = "DELETE FROM posts WHERE post_id = {$CBV}";
+                    // $query = "DELETE FROM posts WHERE post_id = {$CBV}";
+                    deletePost($CBV);
                     // $result = mysqli_query($conn, $query);
                     break;
                     // default:
@@ -37,19 +38,6 @@ if (!$result) {
     echo "<h2>Couldn't fetch posts from database!</h2>";
 } else { ?>
     <form action="" method="POST">
-
-        <!-- <div class="form-group">
-    <select class="form-control" name="" id="">
-        <option value="">1</option>
-        <option value="">1</option>
-        <option value="">1</option>
-        <option value="">1</option>
-    </select>
-    <p>pashm</p>
-</div> -->
-        <!-- <button onclick="pashm()">pashm</button> -->
-        <!-- <a href="#" onclick="myFunction()" class="btn btn-primary">A</a> -->
-
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group">
@@ -59,7 +47,6 @@ if (!$result) {
                         <option value="draft">Draft</option>
                         <option value="delete"">Delete</option>
     </select>
-    
 </div>
   </div>
   <div class=" col-xs-6">
@@ -67,11 +54,10 @@ if (!$result) {
                             <input type="button" class="btn btn-info" value="New Post">
                 </div>
             </div>
-
             <table class="table table-hover table-striped table-responsive table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col"><input onclick="selects(this)" type="checkbox"></th>
+                        <th scope="col"><input name="checkAllBoxes" type="checkbox"></th>
                         <th scope="col">ID</th>
                         <th scope="col">Title</th>
                         <th scope="col">Author</th>
@@ -92,8 +78,7 @@ if (!$result) {
                         while ($cat_row = mysqli_fetch_assoc($cat_result)) {
                             $post_cat_name = $cat_row['cat_title'];
                         }
-
-                        echo "<tr>
+                        echo "<tr value={$post_id}>
                 <th scope='row'><input class='checkBoxes' value={$post_id} id='check' name='checkboxValues[]' type='checkbox'></th>
                 <th scope='row'>{$row['post_id']}</th>
                 <td>{$row['post_title']}</td>
@@ -149,3 +134,6 @@ if (!$result) {
             </table>
     </form>
 <?php } ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="http://localhost/cms/admin/js/scripts.js"></script> -->
+<script type="text/javascript" src="./js/scripts.js"></script>

@@ -48,7 +48,7 @@ if (!$result) {
   </div>
   <div class=" col-xs-6">
                             <input name="bulksubmit" type="submit" class="btn btn-primary" value="Apply">
-                            <input type="button" class="btn btn-info" value="New Post">
+                            <!-- <input type="button" class="btn btn-info" value="Ne"> -->
                 </div>
             </div>
             <table class="table table-hover table-striped table-responsive table-bordered">
@@ -70,6 +70,9 @@ if (!$result) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         $cat_query = "SELECT * FROM posts WHERE post_id = {$row['comment_post_id']}";
                         $cat_result = mysqli_query($conn, $cat_query);
+                        if(!$cat_result){
+                            echo "failed to connect to database and get post name";
+                        }
                         while ($cat_row = mysqli_fetch_assoc($cat_result)) {
                             $post_name = $cat_row['post_title'];
                         }

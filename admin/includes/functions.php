@@ -50,3 +50,13 @@
         
         
 // echo "test content in includes"; 
+
+// deletes post and all related comments to the post
+function deletePost($id){
+    global $conn;
+    $query = "DELETE FROM posts WHERE post_id = {$id}";
+    $result = mysqli_query($conn,$query);
+    $query = "DELETE FROM comments WHERE comment_post_id = {$id}";
+    $result = mysqli_query($conn,$query);
+    return ($result) ? true : false;
+}

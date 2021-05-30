@@ -30,9 +30,8 @@ $smalltxt = "All posts shown here";
 
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
-    $query = "DELETE FROM posts WHERE post_id = $delete_id";
-    $result = mysqli_query($conn, $query);
-    if (!$result) {
+    $result = deletePost($delete_id);
+    if ($result == false) {
         # do sth
         echo "<div class='alert alert-danger'>Couldn't delete the post</div>";
     } else {

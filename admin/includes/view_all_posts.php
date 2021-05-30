@@ -13,7 +13,8 @@ if (isset($_POST['bulksubmit'])) {
                     $query = "UPDATE posts SET post_status = 'draft' WHERE post_id = {$CBV}";
                     break;
                 case 'delete':
-                    $query = "DELETE FROM posts WHERE post_id = {$CBV}";
+                    // $query = "DELETE FROM posts WHERE post_id = {$CBV}";
+                    deletePost($CBV);
                     break;
             }
             $result = mysqli_query($conn, $query);
@@ -42,7 +43,8 @@ if (!$result) {
   </div>
   <div class=" col-xs-6">
                             <input name="bulksubmit" type="submit" class="btn btn-primary" value="Apply">
-                            <input type="button" class="btn btn-info" value="New Post">
+                            <!-- <input type="button" class="btn btn-info" value="New Post"> -->
+                            <a class="btn btn-info" href="posts.php?source=add_post">Add new post</a>
                 </div>
             </div>
 
@@ -73,7 +75,7 @@ if (!$result) {
                             $post_cat_name = $cat_row['cat_title'];
                         }
 
-                        echo "<tr>
+                        echo "<tr value={$post_id} >
                 <th scope='row'><input class='checkBoxes' value={$post_id} id='check' name='checkboxValues[]' type='checkbox'></th>
                 <th scope='row'>{$row['post_id']}</th>
                 <td>{$row['post_title']}</td>
@@ -95,3 +97,13 @@ if (!$result) {
             </table>
     </form>
 <?php } ?>
+<button id="fadebtn">fade</button>
+
+
+<script>
+    $(function() {
+        $("#fadebtn").click(function() {
+            $("tr[value='94']").fadeOut(200);
+        });
+    });
+</script>
