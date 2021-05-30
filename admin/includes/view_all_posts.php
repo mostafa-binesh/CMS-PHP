@@ -11,20 +11,12 @@ if (isset($_POST['bulksubmit'])) {
                     break;
                 case 'draft':
                     $query = "UPDATE posts SET post_status = 'draft' WHERE post_id = {$CBV}";
-                    // $result = mysqli_query($conn, $query);
                     break;
                 case 'delete':
                     $query = "DELETE FROM posts WHERE post_id = {$CBV}";
-                    // $result = mysqli_query($conn, $query);
                     break;
-                    // default:
-                    //     echo "<div class='alert alert-danger'>Please select an option</div>";
-                    //     break;
             }
-            // $result = mysqli_query($conn, $query);
             $result = mysqli_query($conn, $query);
-            // echo 'option is:' .  $_POST['checkBoxOptions'];
-            // echo $CBV;
         }
     } else {
         echo "<div class='alert alert-danger'>Please control the entries</div>";
@@ -36,18 +28,6 @@ if (!$result) {
     echo "<h2>Couldn't fetch posts from database!</h2>";
 } else { ?>
     <form action="" method="POST">
-
-        <!-- <div class="form-group">
-    <select class="form-control" name="" id="">
-        <option value="">1</option>
-        <option value="">1</option>
-        <option value="">1</option>
-        <option value="">1</option>
-    </select>
-    <p>pashm</p>
-</div> -->
-        <!-- <button onclick="pashm()">pashm</button> -->
-        <!-- <a href="#" onclick="myFunction()" class="btn btn-primary">A</a> -->
         <div class="row">
             <div class="col-xs-6">
                 <div class="form-group">
@@ -69,7 +49,8 @@ if (!$result) {
             <table class="table table-hover table-striped table-responsive table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col"><input onclick="selects(this)" type="checkbox"></th>
+                        <th scope="col"><input name="checkAllBoxes" type="checkbox"></th>
+                        <!-- <th scope="col"><input name="checkAllBoxes" onclick="selects(this)" type="checkbox"></th> -->
                         <th scope="col">ID</th>
                         <th scope="col">Title</th>
                         <th scope="col">Author</th>
@@ -79,7 +60,7 @@ if (!$result) {
                         <th scope="col">Tags</th>
                         <th scope="col">Comments</th>
                         <th scope="col">Status</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -110,19 +91,6 @@ if (!$result) {
                 ";
                     }
                     ?>
-                    <!-- <td><a onclick='Confirm('are you sure')' href='?delete={$row['post_id']}'>Delete</a></td> -->
-                    <!-- <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mostafa</td>
-                                        <td>Pashm</td>
-                                        <td>Javascript</td>
-                                        <td>Published</td>
-                                        <td><img src="" alt=""></td>
-                                        <td>pashm,awesome</td>
-                                        <td>Mark</td>
-                                        <td>2020</td>
-                                    </tr> -->
-
                 </tbody>
             </table>
     </form>
