@@ -183,7 +183,7 @@
 
 
                                     <div class="form-group">
-                                        <input class="btn btn-primary" type="submit" name="update_user" value="Update Post">
+                                        <input class="btn btn-primary" type="submit" name="update_user" value="Update Profile">
                                     </div>
 
                                 </form>

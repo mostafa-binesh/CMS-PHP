@@ -54,16 +54,16 @@ if (isset($_POST['update_user'])) {
     $result = mysqli_query($conn, $query);
     if (!$result) {
         echo "failed to connect to the database!";
-    // } else if (mysqli_num_rows($result) > 0 && $_POST['email'] != $row['user_email']) {
-    //     while ($row = mysqli_fetch_assoc($result)) {
+        // } else if (mysqli_num_rows($result) > 0 && $_POST['email'] != $row['user_email']) {
+        //     while ($row = mysqli_fetch_assoc($result)) {
 
-    //         if ($_POST['email'] == $row['user_email']) {
-    //             // no problem
-    //         } else {
+        //         if ($_POST['email'] == $row['user_email']) {
+        //             // no problem
+        //         } else {
 
-    //             echo "this email already exist!";
-    //         }
-    //     }
+        //             echo "this email already exist!";
+        //         }
+        //     }
     } else {
         if ($_POST['newPassword'] == $_POST['newPassword2'] && !empty($_POST['newPassword'])) {
             $password = password_hash($_POST['newPassword'], PASSWORD_ARGON2ID);
@@ -108,6 +108,7 @@ if (isset($_GET['u_id'])) {
         echo "user with this ID does not exist!";
     } else {
         while ($row = mysqli_fetch_assoc($result)) {
+            $user_id = $row['user_id'];
             $username = $row['username'];
             $user_firstname = $row['user_firstname'];
             $user_lastname = $row['user_lastname'];
@@ -170,8 +171,8 @@ if (isset($_GET['u_id'])) {
 
                 <div class="form-group">
                     <input class="btn btn-primary" type="submit" name="update_user" value="Edit User">
+                    <a href="./users.php?delete=<?=$user_id?>" class="btn btn-danger">Delete user</a>
                 </div>
-
             </form>
 <?php
         }
