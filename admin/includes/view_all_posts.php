@@ -1,3 +1,4 @@
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 <?php
 // include_once '../../includes/db.php';
 if (isset($_POST['bulksubmit'])) {
@@ -87,7 +88,7 @@ if (!$result) {
                 <td>{$row['post_comment_count']}</td>
                 <td>{$row['post_status']}</td>           
                 <td><a href='?source=edit&p_id={$row['post_id']}'>Edit</a></td>
-                <td><a onclick=\"javascript: return confirm('Are u sure?')\"  href='?delete={$row['post_id']}'>Delete</a></td>
+                <td><a rel='{$row['post_id']}' class='delete_link' href='javascript::;'>Delete</a></td>
                 <td><a href='../post.php?id={$row['post_id']}'>View</a></td>
                 </tr>
                 ";
@@ -97,7 +98,28 @@ if (!$result) {
             </table>
     </form>
 <?php } ?>
-<button id="fadebtn">fade</button>
+<!-- <button id="fadebtn">fade</button> -->
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Post</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to delete this post?</p>
+            </div>
+            <div class="modal-footer">
+            <a id="modal_link" href="" class="btn btn-danger modal_link">delete</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
 <script>
@@ -105,5 +127,16 @@ if (!$result) {
         $("#fadebtn").click(function() {
             $("tr[value='94']").fadeOut(200);
         });
+
+        $(".delete_link").click(function() {
+            var id = $(this).attr("rel");
+            var link = "posts.php?delete=" + id; // get the id of post
+            $("#modal_link").attr("href",link); // change the link of modal
+            $("#myModal").modal(); // show modal
+
+        });
+
+
+
     });
 </script>
