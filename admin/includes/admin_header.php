@@ -1,13 +1,16 @@
 <?php ob_start(); ?>
 <?php include "../includes/db.php"; ?>
 <?php include "functions.php" ?>
+
 <?php session_start(); ?>
 <?php
 
 if (!isset($_SESSION['username'])) {
 
-    echo "<div class='alert alert-warning'>Your crendital has been expired... redirecting in seconds...</div>";
-    header("refresh:3; url=../includes/login.php");
+    // echo "<div class='alert alert-warning'>Your crendital has been expired... redirecting in seconds...</div>";
+    // header("refresh:3; url=../includes/login.php");
+    // header("location=../includes/login.php");
+    header("location: ../includes/login.php");
     die();
 } else if (isset($_SESSION['username']) && $_SESSION['role'] != 'admin') {
     // if () {
@@ -67,7 +70,8 @@ if (!isset($_SESSION['username'])) {
     <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <!-- fix: should make it load from dynamic address -->
+    <link href="./includes/loading.css" rel="stylesheet"> 
     <!-- <script src="./js/scripts.js"></script> -->
     <!-- <script>
         ClassicEditor
@@ -79,3 +83,4 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <body>
+<?php include "./includes/loadingpage.php"; ?>
