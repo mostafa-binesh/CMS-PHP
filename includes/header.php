@@ -1,4 +1,7 @@
 <?php include_once "includes/db.php";
+require "admin/includes/functions.php";
+siteURL();  
+echo "site url is:" . $GLOBALS['url'];
 session_start(); 
 $post_per_page = 5;
 // online users config

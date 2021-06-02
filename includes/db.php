@@ -12,4 +12,5 @@ if($conn){
     # do nothing
 } else{
     echo "FAILED TO CONNECT TO THE DATABASE!";
+    die();
 }
