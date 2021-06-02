@@ -1,7 +1,7 @@
 <?php
-if (isset($_GET['added'])) {
-    echo "<div class='alert alert-success'>Post added successfuly</div>";
-}
+// if (isset($_GET['added'])) {
+//     echo "<div class='alert alert-success'>Post added successfuly</div>";
+// }
 if (isset($_POST['create_post'])) {
     $post_title = $_POST['title'];
     $post_category_ID = $_POST['category_id'];
@@ -56,9 +56,10 @@ if (isset($_POST['create_post'])) {
             <!-- <option value=""></option> -->
         </select>
     </div>
-    <div class="form-group">
+    <div class="form-group search-box">
         <label for="category">Post author</label>
-        <input type="text" class="form-control" name="author">
+        <input id="author_input" type="text" value="<?= $_SESSION['username'] ?>" type="text" class="form-control" name="author">
+        <div class="search-result"></div>
     </div>
     <div class="form-group">
         <label for="category">Post status</label>
@@ -99,39 +100,65 @@ if (isset($_POST['create_post'])) {
 
 </form>
 <script>
-ClassicEditor.defaultConfig = {
-      toolbar: {
-        items: [
-          'heading',
-          '|',
-          'bold',
-          'italic',
-          'blockQuote',
-          '|',
-          'link',
-          '|',
-          'bulletedList',
-          'numberedList',
-          '|',
-          'insertTable',
-        //   '|',
-        //   'imageUpload',
-          '|',
-          'undo',
-          'redo'
-        ]
-      },
-      image: {
-        toolbar: [
-          'imageStyle:full',
-          'imageStyle:side',
-          '|',
-          'imageTextAlternative'
-        ]
-      },
-      table: {
-        contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
-      },
-      language: 'en'
+    $(function() {
+        // console.log("tets");
+        $('.search-box input[type="text"]').on("keyup input", function() {
+            /* Get input value on change */
+            var inputVal = $(this).val();
+            var resultDropdown = $(this).siblings(".search-result");
+            if (inputVal.length) {
+                $.get("includes/backend_search.php", {
+                    term: inputVal
+                }).done(function(data) {
+                    // Display the returned data in browser
+                    resultDropdown.html(data);
+                });
+            } else {
+                resultDropdown.empty();
+            }
+        });
+        $(document).on("click", ".search-result p", function() {
+            // $(".search-result p").click(function() {
+            // $(this).parent(".search-result").empty();
+            // $(this).parents(".search-box").find('input[type="text"]').val(txt);
+            var txt = $(this).text();
+            $('#author_input').val(txt);
+            $(".search-result").html("");
+        });
+    });
+    ClassicEditor.defaultConfig = {
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'blockQuote',
+                '|',
+                'link',
+                '|',
+                'bulletedList',
+                'numberedList',
+                '|',
+                'insertTable',
+                //   '|',
+                //   'imageUpload',
+                '|',
+                'undo',
+                'redo'
+            ]
+        },
+        image: {
+            toolbar: [
+                'imageStyle:full',
+                'imageStyle:side',
+                '|',
+                'imageTextAlternative'
+            ]
+        },
+        table: {
+            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+        },
+        language: 'en'
     };
 </script>
