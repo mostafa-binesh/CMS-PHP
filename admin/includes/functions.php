@@ -7,6 +7,7 @@
             <table class="table table-hover table-striped table-responsive table-bordered">
                 <thead>
                     <tr>
+                    
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">First Name</th>
@@ -60,3 +61,10 @@ function deletePost($id){
     $result = mysqli_query($conn,$query);
     return ($result) ? true : false;
 }
+function siteURL()
+{
+    // $website_name = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $website_name = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'];
+    $GLOBALS['url'] = $website_name;
+    return $website_name;
+} 
