@@ -7,7 +7,7 @@
             <table class="table table-hover table-striped table-responsive table-bordered">
                 <thead>
                     <tr>
-                    
+
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">First Name</th>
@@ -47,24 +47,68 @@
 
         <?php }
                 }
-            // echo "test content"; 
-        
-        
-// echo "test content in includes"; 
+                // echo "test content"; 
 
-// deletes post and all related comments to the post
-function deletePost($id){
-    global $conn;
-    $query = "DELETE FROM posts WHERE post_id = {$id}";
-    $result = mysqli_query($conn,$query);
-    $query = "DELETE FROM comments WHERE comment_post_id = {$id}";
-    $result = mysqli_query($conn,$query);
-    return ($result) ? true : false;
-}
-function siteURL()
-{
-    // $website_name = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $website_name = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'];
-    $GLOBALS['url'] = $website_name;
-    return $website_name;
-} 
+
+                // echo "test content in includes"; 
+
+                // deletes post and all related comments to the post
+                function deletePost($id)
+                {
+                    global $conn;
+                    $query = "DELETE FROM posts WHERE post_id = {$id}";
+                    $result = mysqli_query($conn, $query);
+                    $query = "DELETE FROM comments WHERE comment_post_id = {$id}";
+                    $result = mysqli_query($conn, $query);
+                    return ($result) ? true : false;
+                }
+                function siteURL()
+                {
+                    $sub_loc = "cms";
+                    // $website_name = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                    $website_name = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['SERVER_NAME'] . "/"  . $sub_loc; // site only
+
+                    // $website_name = $_SERVER['SERVER_NAME'] . "/" . $sub_loc . "/"; // local host only # not working at all
+
+                    $GLOBALS['url'] = $website_name;
+                    return $website_name;
+                }
+                function checkcredential()
+                {
+                    // session_start();
+                    global $conn;
+                    if (!isset($conn)) {
+                        include "../../includes/db.php";
+                    }
+                    if(isset($_SESSION['username'])){
+
+                        // echo "username is;";
+                        // echo $_SESSION['username'];
+                        // die();
+                        $query = "SELECT * FROM users WHERE username = '{$_SESSION['username']}'";
+                        $result = mysqli_query($conn, $query);
+                        if (!$result) {
+                            echo "failed to connect to database";
+                        } else {
+                            if (mysqli_num_rows($result) == 1) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    if ($row['user_role'] == 'admin' && password_verify($_SESSION['password'], $row['user_password'])) {
+                                        return true;
+                                    } else {
+                                        session_destroy();
+                                        return false;
+                                        echo "no admin or password changed";
+                                        die();
+                                    }
+                                }
+                            } else {
+                                session_destroy();
+                                return false;
+                            }
+                        }
+                    } else{
+                        // do nothing
+                        // no session avaialbe
+                        return true;
+                    }
+                }

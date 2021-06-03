@@ -1,8 +1,14 @@
 <?php ob_start(); ?>
-<?php include "../includes/db.php"; ?>
-<?php include "functions.php" ?>
-
 <?php session_start(); ?>
+<?php include "../includes/db.php"; ?>
+<?php require "includes/functions.php" ?>
+<?php siteURL();
+if (!checkcredential()) {
+    header("location: " . "../index.php");
+    // echo "problem happend";
+    // die();
+}
+?>
 <?php
 
 if (!isset($_SESSION['username'])) {
@@ -72,7 +78,7 @@ if (!isset($_SESSION['username'])) {
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- fix: should make it load from dynamic address -->
-    <link href="./includes/loading.css" rel="stylesheet"> 
+    <link href="./includes/loading.css" rel="stylesheet">
     <!-- <script src="./js/scripts.js"></script> -->
     <!-- <script>
         ClassicEditor
@@ -84,4 +90,4 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <body>
-<?php include "./includes/loadingpage.php"; ?>
+    <?php include "./includes/loadingpage.php"; ?>

@@ -1,8 +1,12 @@
 <?php include_once "includes/db.php";
 require "admin/includes/functions.php";
 siteURL();  
-echo "site url is:" . $GLOBALS['url'];
 session_start(); 
+if (!checkcredential()) {
+    // header("location: " . "index.php");
+    echo "problem happend";
+    die();
+}
 $post_per_page = 5;
 // online users config
 
