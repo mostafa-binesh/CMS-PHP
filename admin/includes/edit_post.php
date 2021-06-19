@@ -133,7 +133,7 @@ if (isset($_GET['p_id'])) {
 
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="update_post" value="Publish Post">
+        <input class="btn btn-primary" type="submit" name="update_post" value="Update Post">
     </div>
 
 </form>
