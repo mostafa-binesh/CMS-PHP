@@ -80,7 +80,7 @@
                     if (!isset($conn)) {
                         include "../../includes/db.php";
                     }
-                    if(isset($_SESSION['username'])){
+                    if (isset($_SESSION['username'])) {
 
                         // echo "username is;";
                         // echo $_SESSION['username'];
@@ -106,9 +106,26 @@
                                 return false;
                             }
                         }
-                    } else{
+                    } else {
                         // do nothing
                         // no session avaialbe
                         return true;
                     }
+                }
+
+                function rip_tags($string, $rep = ' ')
+                {
+
+                    // ----- remove HTML TAGs -----
+                    $string = preg_replace('/<[^>]*>/', $rep, $string);
+
+                    // ----- remove control characters -----
+                    $string = str_replace("\r", '', $string);    // --- replace with empty space
+                    $string = str_replace("\n", $rep, $string);   // --- replace with space
+                    $string = str_replace("\t", $rep, $string);   // --- replace with space
+
+                    // ----- remove multiple spaces -----
+                    $string = trim(preg_replace('/ {2,}/', $rep, $string));
+
+                    return $string;
                 }

@@ -48,14 +48,7 @@ include "includes/header.php";
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = substr($row['post_content'], 0, 100);
-
-                // $post_title = $row['post_title'];
-                // $post_title = $row['post_title'];
-                // $post_title = $row['post_title'];
-                // $post_title = $row['post_title'];
-                // $post_title = $row['post_title'];
-
-
+                $post_content = rip_tags($post_content) . "...";
             ?>
                 <h2>
                     <a href="post.php?id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
