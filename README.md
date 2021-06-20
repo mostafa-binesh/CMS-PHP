@@ -12,7 +12,7 @@ DONE IMPORTANT FEATURES:
 - old input values function  
 - send queries using prepared statements  
 - image compressor  
-
+- gather all js and css files from local files, not CDNs  
 
 **MAIN REASON I DON'T WORK WITH PHP**  
 - NO ROUTING SYSTEM! (.PHP ADD END OF THE ADDRESS)  
