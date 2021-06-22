@@ -13,9 +13,12 @@ DONE IMPORTANT FEATURES:
 - send queries using prepared statements  
 - image compressor  
 - add password len and security check
-- all ajax requests handler in one js file\
-- all php requests handler in one php file\  
-- change all buttons in comment, post and ... sections to a form to send post request no get for more security  
+- all ajax requests handler in one js file  
+- all php requests handler in one php file  
+- change all buttons in comment, post and ... sections to a form to send post request no get for more security 
+- do everything with functions  
+- check user credential every 5 seconds using ajax  
+
 
 **MAIN REASON I DON'T WORK WITH PHP**  
-- NO ROUTING SYSTEM! (.PHP ADD END OF THE ADDRESS)  
+- NO ROUTING SYSTEM! (.PHP extension on urls)  
